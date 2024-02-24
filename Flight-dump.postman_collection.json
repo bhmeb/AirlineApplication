@@ -1,0 +1,80 @@
+{
+	"info": {
+		"_postman_id": "faa91e5b-5ba8-4a90-9653-962f7d8f8c2e",
+		"name": "Flight-dump",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29987947"
+	},
+	"item": [
+		{
+			"name": "retrieve",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9093/airline/retrieve",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9093",
+					"path": [
+						"airline",
+						"retrieve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "retrieveById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9093/airline/retrieveById/1001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9093",
+					"path": [
+						"airline",
+						"retrieveById",
+						"1001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"flightNumber\": 1006,\r\n  \"origin\": {\r\n    \"orgAirport\": \"Kochi \",\r\n    \"orgCode\": \"COK\"\r\n  },\r\n  \"destination\": {\r\n    \"destAirport\": \"Kolhapur\",\r\n    \"destCode\": \"KLH\"\r\n  },\r\n  \"duration\": 35\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9093/airline/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9093",
+					"path": [
+						"airline",
+						"add"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
