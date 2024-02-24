@@ -58,6 +58,26 @@ public class Flight {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Flight flight)) return false;
+
+        if (getFlightNumber() != flight.getFlightNumber()) return false;
+        if (!getOrigin().equals(flight.getOrigin())) return false;
+        if (!getDestination().equals(flight.getDestination())) return false;
+        return getDuration().equals(flight.getDuration());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getFlightNumber();
+        result = 31 * result + getOrigin().hashCode();
+        result = 31 * result + getDestination().hashCode();
+        result = 31 * result + getDuration().hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "Flight{" +
                 "flightNumber=" + flightNumber +

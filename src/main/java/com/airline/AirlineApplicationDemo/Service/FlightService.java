@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Service
 public class FlightService {
@@ -20,7 +18,7 @@ public class FlightService {
         return repository.save(flight);
     }
 
-    public List<Flight> fetchFlight(){
+    public List<Flight> fetchFlightWithSorted(){
         return repository.findAll();
     }
 

@@ -33,12 +33,12 @@ public class FlightController {
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Flight> addFlight(@RequestBody Flight flight) {
 
-        Optional<Flight> flightNumber = repository.findById(flight.getFlightNumber());
+        Optional<Flight> flightsResponse = repository.findById(flight.getFlightNumber());
 
         try {
-            if (!flightNumber.isPresent()) {
+            if (!flightsResponse.isPresent()) {
                 flight.setDuration(flight.getDuration()+" Minutes");
-                Flight response = service.addFlight(flight);
+                service.addFlight(flight);
                 return new ResponseEntity<>(flight, HttpStatus.CREATED);
             } else {
                 throw new RecordAlreadyExistException("Flight with number: " + flight.getFlightNumber() + " already exist");
@@ -50,14 +50,14 @@ public class FlightController {
     }
 
     @GetMapping(value = "/retrieve")
-    public ResponseEntity<List<Flight>> fetchFlight() {
-        List<Flight> response = service.fetchFlight();
+    public ResponseEntity<List<Flight>> fetchFlightWithSorted() {
+        List<Flight> response = service.fetchFlightWithSorted();
         List<Flight> res = response.stream()
                 .sorted(Comparator.comparing(Flight::getDuration))
                 .collect(Collectors.toList());
 
         if (res != null) {
-            LOG.info("Available Flights");
+            LOG.info("Available Flights with sort duration order first");
             return new ResponseEntity<>(res, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
