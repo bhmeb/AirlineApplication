@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -23,8 +24,8 @@ public class FlightService {
         return repository.findAll();
     }
 
-    public Flight fetchFlightById(Integer flightNumber) {
-        return repository.findById(flightNumber)
+    public Map<Integer, List<Flight>> fetchFlightById(Integer flightNumber) {
+        return (Map<Integer, List<Flight>>) repository.findById(flightNumber)
                 .orElseThrow(() -> new EntityNotFoundException("Flight not found with id " + flightNumber));
     }
 }

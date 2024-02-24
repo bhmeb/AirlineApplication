@@ -29,4 +29,12 @@ public class Destination {
     public void setDestCode(String destCode) {
         this.destCode = destCode;
     }
+
+    @Override
+    public String toString() {
+        return "Destination{" +
+                "destAirport='" + destAirport + '\'' +
+                ", destCode='" + destCode + '\'' +
+                '}';
+    }
 }

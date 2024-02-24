@@ -51,13 +51,15 @@ public class FlightController {
     }
 
     @GetMapping(value = "/retrieveById/{flightNumber}")
-    public ResponseEntity<List<Flight>> fetchFlightById(@PathVariable Integer flightNumber) {
+    public ResponseEntity<Map<Integer, List<Flight>>> fetchFlightById(@PathVariable Integer flightNumber) {
 
-        Flight response = service.fetchFlightById(flightNumber);
+        Map<Integer, List<Flight>> response = service.fetchFlightById(flightNumber);
 
-        List<Flight> res = Arrays.asList(response)
+      /*  List<Flight> res = Arrays.asList(response)
                 .stream()
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
+        Map<Integer, List<Flight>> res = response.entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         if (res != null) {
             LOG.info("*****List of Flights***" + res);

@@ -31,4 +31,12 @@ public class Origin {
     public void setOrgCode(String orgCode) {
         this.orgCode = orgCode;
     }
+
+    @Override
+    public String toString() {
+        return "Origin{" +
+                "orgAirport='" + orgAirport + '\'' +
+                ", orgCode='" + orgCode + '\'' +
+                '}';
+    }
 }
