@@ -1,0 +1,74 @@
+[
+    {
+        "flightNumber": 1005,
+        "origin": {
+            "orgAirport": "Bhubaneswar ",
+            "orgCode": "BBI"
+        },
+        "destination": {
+            "destAirport": "Mumbai",
+            "destCode": "BOM"
+        },
+        "duration": "25 Minutes"
+    },
+    {
+        "flightNumber": 1002,
+        "origin": {
+            "orgAirport": "Kolkata",
+            "orgCode": "CCU"
+        },
+        "destination": {
+            "destAirport": "Mumbai",
+            "destCode": "BOM"
+        },
+        "duration": "30 Minutes"
+    },
+    {
+        "flightNumber": 1006,
+        "origin": {
+            "orgAirport": "Kochi ",
+            "orgCode": "COK"
+        },
+        "destination": {
+            "destAirport": "Kolhapur",
+            "destCode": "KLH"
+        },
+        "duration": "35 Minutes"
+    },
+    {
+        "flightNumber": 1001,
+        "origin": {
+            "orgAirport": "Mumbai",
+            "orgCode": "BOM"
+        },
+        "destination": {
+            "destAirport": "Kolkata",
+            "destCode": "CCU"
+        },
+        "duration": "45 Minutes"
+    },
+    {
+        "flightNumber": 1003,
+        "origin": {
+            "orgAirport": "Delhi",
+            "orgCode": "DEL"
+        },
+        "destination": {
+            "destAirport": "Mumbai",
+            "destCode": "BOM"
+        },
+        "duration": "55 Minutes"
+    },
+    {
+        "flightNumber": 1004,
+        "origin": {
+            "orgAirport": "Bangalore ",
+            "orgCode": "BLR"
+        },
+        "destination": {
+            "destAirport": "Mumbai",
+            "destCode": "BOM"
+        },
+        "duration": "60 Minutes"
+    }
+]
