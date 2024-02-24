@@ -102,10 +102,10 @@ public class ServiceTest {
 
         List<Flight> flights = Arrays.asList(flight);
 
-        Map<Integer, List<Flight>> mapObject = flights.stream()
+       /* Map<Integer, List<Flight>> mapObject = flights.stream()
                 .collect(Collectors.groupingBy(Flight::getFlightNumber))
                 .entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));*/
 
         try {
             //Optional<Flight> lightOptional = Optional.ofNullable((Flight) flights.stream().collect(Collectors.toList()));
@@ -116,7 +116,7 @@ public class ServiceTest {
             if(lightOptional.isPresent()){
                 int id = lightOptional.get();
                 System.out.println("FlightNumber is not empty: "+ id);
-                Mockito.when(service.fetchFlightById(id)).thenReturn(mapObject);
+                Mockito.when(service.fetchFlightById(id)).thenReturn(Mockito.any());
                 controller.fetchFlightById(id);
             }else{
                 System.out.println("FlightNumber is empty: ");

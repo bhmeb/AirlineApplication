@@ -24,8 +24,8 @@ public class FlightService {
         return repository.findAll();
     }
 
-    public Map<Integer, List<Flight>> fetchFlightById(Integer flightNumber) {
-        return (Map<Integer, List<Flight>>) repository.findById(flightNumber)
+    public Flight fetchFlightById(Integer flightNumber) {
+        return (repository.findById(flightNumber))
                 .orElseThrow(() -> new EntityNotFoundException("Flight not found with id " + flightNumber));
     }
 }
