@@ -1,0 +1,12 @@
+{
+  "flightNumber": 1007,
+  "origin": {
+    "orgAirport": "Rajkot ",
+    "orgCode": "RAJ"
+  },
+  "destination": {
+    "destAirport": "Ranchi",
+    "destCode": "IXR"
+  },
+  "duration": 70
+}
