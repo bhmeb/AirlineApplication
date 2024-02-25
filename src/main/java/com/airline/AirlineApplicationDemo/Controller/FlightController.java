@@ -1,8 +1,7 @@
 package com.airline.AirlineApplicationDemo.Controller;
 
-import com.airline.AirlineApplicationDemo.Exception.InternalException;
+import com.airline.AirlineApplicationDemo.Exception.ApplicationException;
 import com.airline.AirlineApplicationDemo.Exception.RecordAlreadyExistException;
-import com.airline.AirlineApplicationDemo.Exception.ServiceException;
 import com.airline.AirlineApplicationDemo.Model.Flight;
 import com.airline.AirlineApplicationDemo.Repository.FlightRepository;
 import com.airline.AirlineApplicationDemo.Service.FlightService;
@@ -14,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.crypto.spec.OAEPParameterSpec;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -33,20 +31,27 @@ public class FlightController {
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Flight> addFlight(@RequestBody Flight flight) {
 
-        Optional<Flight> flightsResponse = repository.findById(flight.getFlightNumber());
+        List<Flight> response = Arrays.asList(flight).stream()
+                .collect(Collectors.toList());
+
+        Flight resFromDB = service.fetchFlightById(flight.getFlightNumber());
 
         try {
-            if (!flightsResponse.isPresent()) {
+            if (response!=null) {
                 flight.setDuration(flight.getDuration()+" Minutes");
-                service.addFlight(flight);
-                return new ResponseEntity<>(flight, HttpStatus.CREATED);
+                if(resFromDB.getFlightNumber()!=flight.getFlightNumber()){
+                    service.addFlight(flight);
+                    return new ResponseEntity<>(flight, HttpStatus.CREATED);
+                }else{
+                    LOG.error("Record already exists!!!"+ flight.getFlightNumber());
+                    return new ResponseEntity<>(HttpStatus.valueOf("Record already exists!!!"));
+                }
             } else {
-                throw new RecordAlreadyExistException("Flight with number: " + flight.getFlightNumber() + " already exist");
+                throw new ApplicationException("Response empty {} ");
             }
         } catch (RecordAlreadyExistException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
     }
 
     @GetMapping(value = "/retrieve")

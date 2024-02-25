@@ -31,26 +31,31 @@ public class ServiceTest {
     FlightRepository repository;
     @Mock
     FlightController controller;
+    @Mock
+    Flight flight,flight1;
 
     @Before
-    public void init() {
-    }
-
-
-    @Test
-    public void addFlightServiceTest() {
-
-        Flight flight = new Flight();
-        assertNotNull(flight);
+    public void init(){
+        flight = new Flight();
         flight.setFlightNumber(1001);
         flight.setOrigin(new Origin("Kolkata", "CCU"));
         flight.setDestination(new Destination("Mumbai", "BOM"));
-        flight.setDuration("30");
+        flight.setDuration("60");
 
-        List<Flight> flightList = List.of(flight);
+        flight1 = new Flight();
+        flight1.setFlightNumber(1002);
+        flight1.setOrigin(new Origin("Mumbai", "BOM"));
+        flight1.setDestination(new Destination("Bhubaneswar", "BBI"));
+        flight1.setDuration("50");
+    }
 
+    @Test
+    public void addFlightServiceTest() {
         try {
-            List<Flight> res = flightList.stream().collect(Collectors.toList());
+            List<Flight> res = List.of(flight)
+                    .stream()
+                    .collect(Collectors.toList());
+
             if (res != null) {
                 System.out.println("Data not empty: " + res);
                 Mockito.when(repository.save(flight)).thenReturn(flight);
@@ -62,25 +67,16 @@ public class ServiceTest {
     }
     @Test
     public void fetchFlightServiceTest() {
-        Flight flight1 = new Flight();
-        flight1.setFlightNumber(1001);
-        flight1.setOrigin(new Origin("Kolkata", "CCU"));
-        flight1.setDestination(new Destination("Mumbai", "BOM"));
-        flight1.setDuration("30");
-
-        Flight flight2 = new Flight();
-        flight2.setFlightNumber(1001);
-        flight2.setOrigin(new Origin("Mumbai", "BOM"));
-        flight2.setDestination(new Destination("Bhubaneswar", "BBI"));
-        flight2.setDuration("30");
-
+        assertNotNull(flight);
         assertNotNull(flight1);
-        assertNotNull(flight2);
 
-        List<Flight> flightList = Arrays.asList(flight1, flight2);
+        List<Flight> flightList = Arrays.asList(flight, flight1);
 
         try {
-            Optional<Flight> mockData = flightList.stream().min(Comparator.comparing(Flight::getDuration));
+            Optional<Flight> mockData = Arrays.asList(flight, flight1)
+                    .stream()
+                    .min(Comparator.comparing(Flight::getDuration));
+
             if (mockData.isPresent()) {
                 System.out.println("Data not empty: " + mockData.get());
                 Mockito.when(repository.findAll()).thenReturn(flightList);
@@ -95,15 +91,8 @@ public class ServiceTest {
 
     @Test
     public void fetchFlightByIdServiceTest() {
-        Flight flight = new Flight();
-        flight.setFlightNumber(1001);
-        flight.setOrigin(new Origin("Kolkata", "CCU"));
-        flight.setDestination(new Destination("Mumbai", "BOM"));
-        flight.setDuration("30");
-        List<Flight> flights = List.of(flight);
-
         try {
-            Optional<Integer> lightOptional = flights.stream()
+            Optional<Integer> lightOptional = List.of(flight).stream()
                     .map(Flight::getFlightNumber)
                     .min(Comparator.comparing(Function.identity()));
 
